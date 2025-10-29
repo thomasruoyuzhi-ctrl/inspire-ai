@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify, render_template
-import openai
+import requests
 import os
 
 app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 @app.route('/')
 def home():
@@ -25,13 +26,18 @@ def generate():
     }}
     """
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.8
-        )
+        headers = {
+            "Authorization": f"Bearer {GROQ_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        data = {
+            "model": "llama3-8b-8192",
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.8
+        }
+        response = requests.post(GROQ_URL, json=data, headers=headers)
+        result = response.json()['choices'][0]['message']['content'].strip()
         import json
-        result = response.choices[0].message.content.strip()
         return jsonify(json.loads(result))
     except Exception as e:
         return jsonify({"error": str(e)})
