@@ -1,6 +1,9 @@
+```python
 from flask import Flask, request, jsonify, render_template
 import requests
 import os
+import json
+import re
 
 app = Flask(__name__)
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -18,7 +21,7 @@ def generate():
     要求：
     1. 句子简短有力，10-20字
     2. 带情绪感染力
-    3. 输出JSON格式：
+    3. 输出纯JSON格式（不要任何说明）：
     {{
       "quote": "句子",
       "tags": ["#tag1", "#tag2", "#tag3", "#tag4"],
@@ -33,14 +36,33 @@ def generate():
         data = {
             "model": "llama3-8b-8192",
             "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.8
+            "temperature": 0.8,
+            "max_tokens": 150
         }
         response = requests.post(GROQ_URL, json=data, headers=headers)
+        response.raise_for_status()
         result = response.json()['choices'][0]['message']['content'].strip()
-        import json
-        return jsonify(json.loads(result))
+
+        # 提取 JSON（防止多余文字）
+        json_match = re.search(r'\{.*\}', result, re.DOTALL)
+        if json_match:
+            json_str = json_match.group(0)
+            data = json.loads(json_str)
+        else:
+            # 兜底
+            data = {
+                "quote": "坚持就是胜利！",
+                "tags": ["#坚持", "#励志", "#正能量", "#抖音"],
+                "desc": "每一天的坚持，都是成功的开始！"
+            }
+
+        return jsonify(data)
     except Exception as e:
-        return jsonify({"error": str(e)})
+        return jsonify({
+            "quote": "AI 正在思考人生...",
+            "tags": ["#励志", "#抖音", "#早安", "#正能量"],
+            "desc": "错误：" + str(e)[:20]
+        })
 
 if __name__ == '__main__':
     app.run()
