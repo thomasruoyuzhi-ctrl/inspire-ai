@@ -3,14 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inspire AI - 抖音励志文案生成器</title>
+  <title>Inspire AI - 抖音文案神器</title>
   <style>
     body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0; padding: 20px; color: #fff; }
     .container { max-width: 600px; margin: 50px auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     h1 { text-align: center; margin-bottom: 30px; }
     input { width: 100%; padding: 15px; font-size: 18px; border: none; border-radius: 10px; margin-bottom: 20px; }
-    button { width: 100%; padding: 15px; background: #ff6b6b; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
+    button { width: 100%; padding: 15px; background: #ff6b6b; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; transition: 0.3s; }
     button:hover { background: #ff5252; }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+
+    /* 进度条容器 */
+    .loading { margin: 20px 0; display: none; text-align: center; }
+    .progress-container { width: 100%; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; margin: 10px 0; }
+    .progress-bar { height: 20px; width: 0%; background: linear-gradient(90deg, #4ecdc4, #44a08d); border-radius: 10px; transition: width 0.4s ease; }
+    .loading-text { font-style: italic; color: #ffd93d; }
+
     .result { margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 10px; display: none; }
     .quote { font-size: 24px; font-weight: bold; margin: 15px 0; }
     .tags { color: #ffd93d; font-weight: bold; }
@@ -22,8 +30,17 @@
   <div class="container">
     <h1>Inspire AI</h1>
     <input type="text" id="theme" placeholder="输入主题（如：坚持、早安、奋斗）" value="坚持">
-    <button onclick="generate()">生成抖音文案</button>
+    <button id="generateBtn" onclick="generate()">生成抖音文案</button>
     
+    <!-- 进度条 -->
+    <div id="loading" class="loading">
+      <div class="loading-text">正在为你生成抖音金句...</div>
+      <div class="progress-container">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- 结果区 -->
     <div id="result" class="result">
       <div class="quote" id="quote"></div>
       <div class="tags" id="tags"></div>
@@ -34,23 +51,62 @@
 
   <script>
     async function generate() {
-      const theme = document.getElementById('theme').value;
-      const res = await fetch('/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ theme })
-      });
-      const data = await res.json();
-      document.getElementById('quote').innerText = data.quote;
-      document.getElementById('tags').innerText = data.tags.join(' ');
-      document.getElementById('desc').innerText = data.desc;
-      document.getElementById('result').style.display = 'block';
+      const btn = document.getElementById('generateBtn');
+      const loading = document.getElementById('loading');
+      const result = document.getElementById('result');
+      const progressBar = document.getElementById('progressBar');
+
+      // 1. 禁用按钮 + 显示加载
+      btn.disabled = true;
+      btn.innerText = "生成中...";
+      loading.style.display = "block";
+      result.style.display = "none";
+
+      // 2. 模拟进度条（美观）
+      let width = 0;
+      const interval = setInterval(() => {
+        if (width >= 90) {
+          clearInterval(interval);
+        } else {
+          width += 5;
+          progressBar.style.width = width + '%';
+        }
+      }, 100);
+
+      // 3. 调用后端
+      try {
+        const theme = document.getElementById('theme').value;
+        const res = await fetch('/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ theme })
+        });
+        const data = await res.json();
+
+        // 4. 完成！显示结果
+        clearInterval(interval);
+        progressBar.style.width = '100%';
+        setTimeout(() => {
+          document.getElementById('quote').innerText = data.quote;
+          document.getElementById('tags').innerText = data.tags.join(' ');
+          document.getElementById('desc').innerText = data.desc;
+          result.style.display = "block";
+          loading.style.display = "none";
+          btn.disabled = false;
+          btn.innerText = "生成抖音文案";
+        }, 300);
+      } catch (e) {
+        alert("生成失败，请重试！");
+        btn.disabled = false;
+        btn.innerText = "生成抖音文案";
+        loading.style.display = "none";
+      }
     }
 
     function copyAll() {
       const text = `${document.getElementById('quote').innerText}\n${document.getElementById('tags').innerText}\n${document.getElementById('desc').innerText}`;
       navigator.clipboard.writeText(text);
-      alert('已复制到剪贴板！快去发抖音吧！');
+      alert('已复制！快去发抖音吧！');
     }
   </script>
 </body>
