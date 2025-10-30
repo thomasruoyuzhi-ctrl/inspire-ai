@@ -68,3 +68,110 @@ button:disabled { background: #ccc; cursor: not-allowed; }
   font-size: 16px;
 }
 .copy-script:hover { background: #c0392b; }
+
+
+/*新加的*/
+/* === 响应式卡片项 === */
+.item {
+  background: rgba(255,255,255,0.15);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.item .quote {
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0 50px 0 0;
+  word-break: break-all;
+}
+
+.item .tags {
+  color: #ffd93d;
+  font-weight: bold;
+  margin: 0 50px 0 0;
+  word-spacing: 8px;
+}
+
+.item .desc {
+  font-style: normal;
+  line-height: 1.6;
+  margin: 0 50px 0 0;
+  color: #f0f0f0;
+}
+
+/* 复制小按钮 */
+.copy-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.copy-quote { background: #e74c3c; }
+.copy-quote:hover { background: #c0392b; }
+
+.copy-tags { background: #f39c12; }
+.copy-tags:hover { background: #d35400; }
+
+.copy-desc { background: #9b59b6; }
+.copy-desc:hover { background: #8e44ad; }
+
+/* === 统计条 === */
+.stats {
+  text-align: center;
+  font-size: 14px;
+  color: #ffd93d;
+  margin: 16px 0;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.stats.show { opacity: 1; }
+
+/* === 底部功能按钮组 === */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.action-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+.action-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(46,204,113,0.4); }
+
+.action-btn.again {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+.action-btn.again:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(52,152,219,0.4); }
+
+.action-btn.script {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+}
+.action-btn.script:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(230,126,34,0.4); }
+
