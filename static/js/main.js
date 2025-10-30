@@ -36,22 +36,24 @@ async function generate() {
     document.getElementById('stats').style.display = 'block';
 
     
-    setTimeout(() => {
+        setTimeout(() => {
       document.getElementById('quote').innerText = data.quote;
       document.getElementById('tags').innerText = data.tags.join(' ');
       document.getElementById('desc').innerText = data.desc;
+    
+      // 更新统计
+      let count = parseInt(localStorage.getItem('generateCount') || '0') + 1;
+      localStorage.setItem('generateCount', count);
+      const statsEl = document.getElementById('stats');
+      const countEl = document.getElementById('count');
+      countEl.innerText = count;
+      statsEl.classList.add('show');
+      statsEl.style.display = 'block';
+    
       result.style.display = "block";
       loading.style.display = "none";
       btn.disabled = false;
       btn.innerText = "生成抖音文案";
-      // 在 setTimeout 里，result 显示后添加：
-      /////////////
-      ////////////
-    document.getElementById('stats').style.display = 'block';
-    let count = localStorage.getItem('generateCount') || 0;
-    count++;
-    localStorage.setItem('generateCount', count);
-    document.getElementById('count').innerText = count;
     }, 300);
   } catch (e) {
     alert("生成失败，请重试！");
