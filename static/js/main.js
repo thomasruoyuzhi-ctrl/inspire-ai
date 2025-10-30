@@ -54,3 +54,10 @@ function copyAll() {
 function copyToClipboard(text, message) {
   navigator.clipboard.writeText(text).then(() => alert(message));
 }
+
+
+function generateAgain() {
+  const theme = document.getElementById('theme').value || '励志';
+  // 重新触发生成
+  document.getElementById('generateBtn').click();
+}
