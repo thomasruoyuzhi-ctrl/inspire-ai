@@ -23,7 +23,33 @@
     .quote { font-size: 24px; font-weight: bold; margin: 15px 0; }
     .tags { color: #ffd93d; font-weight: bold; }
     .desc { margin-top: 15px; font-style: italic; }
-    .copy { background: #4ecdc4; margin-top: 10px; padding: 8px 15px; border: none; color: white; border-radius: 5px; cursor: pointer; }
+    copy {
+  background: #4ecdc4;
+  margin: 8px 0 0 0;
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  float: right;
+  transition: 0.3s;
+}
+.copy:hover { background: #3ab8b1; }
+.copy-quote { background: #ff6b6b; }
+.copy-quote:hover { background: #ff5252; }
+.copy-tags { background: #f39c12; }
+.copy-tags:hover { background: #e67e22; }
+.copy-desc { background: #9b59b6; }
+.copy-desc:hover { background: #8e44ad; }
+.copy-all {
+  background: #2ecc71;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.copy-all:hover { background: #27ae60; }
   </style>
 </head>
 <body>
@@ -41,13 +67,20 @@
     </div>
 
     <!-- 结果区 -->
-    <div id="result" class="result">
-      <div class="quote" id="quote"></div>
-      <div class="tags" id="tags"></div>
-      <div class="desc" id="desc"></div>
-      <button class="copy" onclick="copyAll()">复制全部</button>
-    </div>
-  </div>
+<div id="result" class="result">
+  <div class="quote" id="quote"></div>
+  <button class="copy copy-quote" onclick="copyQuote()">复制金句</button>
+
+  <div class="tags" id="tags"></div>
+  <button class="copy copy-tags" onclick="copyTags()">复制标签</button>
+
+  <div class="desc" id="desc"></div>
+  <button class="copy copy-desc" onclick="copyDesc()">复制描述</button>
+
+  <hr style="border: 1px dashed rgba(255,255,255,0.3); margin: 20px 0;">
+
+  <button class="copy copy-all" onclick="copyAll()">复制全部</button>
+</div>
 
   <script>
     async function generate() {
@@ -107,6 +140,37 @@
       const text = `${document.getElementById('quote').innerText}\n${document.getElementById('tags').innerText}\n${document.getElementById('desc').innerText}`;
       navigator.clipboard.writeText(text);
       alert('已复制！快去发抖音吧！');
+    }
+    function copyQuote() {
+  const text = document.getElementById('quote').innerText;
+  copyToClipboard(text, '金句已复制！');
+}
+    
+    function copyTags() {
+      const text = document.getElementById('tags').innerText;
+      copyToClipboard(text, '标签已复制！');
+    }
+    
+    function copyDesc() {
+      const text = document.getElementById('desc').innerText;
+      copyToClipboard(text, '描述已复制！');
+    }
+    
+    function copyAll() {
+      const quote = document.getElementById('quote').innerText;
+      const tags = document.getElementById('tags').innerText;
+      const desc = document.getElementById('desc').innerText;
+      const text = `${quote}\n${tags}\n${desc}`;
+      copyToClipboard(text, '已复制全部！快去发抖音吧！');
+    }
+    
+    // 封装复制逻辑 + 提示
+    function copyToClipboard(text, message) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(message);
+      }).catch(() => {
+        alert('复制失败，请手动选择复制');
+      });
     }
   </script>
 </body>
