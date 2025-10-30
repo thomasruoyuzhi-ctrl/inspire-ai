@@ -16,15 +16,23 @@ def home():
 def generate():
     theme = request.json.get('theme', '励志')
     prompt = f"""
-    生成一条抖音风格的{theme}励志短句，适合发视频。
+    你现在是抖音顶级文案大师，风格随机切换！
+    主题：{theme}
+
+    随机选择一种风格生成（不要重复）：
+    1. 热血燃爆型（如“冲啊兄弟！”）
+    2. 温柔治愈型（如“慢慢来也很好”）
+    3. 反转金句型（如“越努力越幸运？不，是越坚持越自由！”）
+    4. 段子手型（如“早安？不，是早安暴富！”）
+
     要求：
-    1. 句子简短有力，10-20字
-    2. 带情绪感染力
-    3. 输出纯JSON格式（不要任何说明）：
+    - 句子 10-20 字，押韵更好
+    - 情绪感染力爆棚
+    - 输出纯 JSON：
     {{
-      "quote": "句子",
-      "tags": ["#tag1", "#tag2", "#tag3", "#tag4"],
-      "desc": "视频描述文案，30字内"
+      "quote": "金句",
+      "tags": ["#随机tag1", "#tag2", "#tag3", "#tag4"],
+      "desc": "视频描述，30字内，带动作号召"
     }}
     """
     try:
@@ -35,8 +43,11 @@ def generate():
         data = {
             "model": "llama-3.3-70b-versatile",
             "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.8,
-            "max_tokens": 150
+            "temperature": 1.3,  # 疯狂创意模式！1.0+ 才够随机
+            "top_p": 0.95,       # 词汇多样性
+            "max_tokens": 200,
+            "presence_penalty": 0.6,  # 避免重复词
+            "frequency_penalty": 0.8  # 避免重复句子
         }
         response = requests.post(GROQ_URL, json=data, headers=headers)
         response.raise_for_status()
