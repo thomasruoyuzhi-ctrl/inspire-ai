@@ -82,51 +82,32 @@ button:disabled { background: #ccc; cursor: not-allowed; }
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  /* 添加这行 */
+  padding-right: 70px; /* 给按钮留出足够空间 */
 }
-
-.card:hover {
-  transform: translateY(-2px);
-}
-
-.card-label {
-  position: absolute;
-  top: -10px;
-  left: 16px;
-  background: #ff6b6b;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 12px;
-  z-index: 1;
-}
-
-.card:nth-child(2) .card-label { background: #f39c12; }
-.card:nth-child(3) .card-label { background: #9b59b6; }
 
 .card-content {
-  margin: 8px 50px 8px 0;
+  margin: 8px 0; /* 移除右侧margin */
   line-height: 1.6;
-  word-break: break-all;
+  word-break: break-word; /* 改为break-word更好 */
   color: #ffffff;
   font-size: 16px;
 }
 
-.card-content.quote {
-  font-weight: bold;
-  font-size: 18px;
-  color: #ffd93d;
-}
-
-.card-content.tags {
-  color: #ffeaa7;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.card-content.desc {
-  color: #f0f0f0;
-  font-style: normal;
+.copy-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  /* 确保按钮在内容之上 */
+  z-index: 2;
 }
 
 /* 复制按钮 */
