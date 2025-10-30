@@ -36,19 +36,19 @@ async function generate() {
     document.getElementById('stats').style.display = 'block';
 
     
-        setTimeout(() => {
+        // 在 setTimeout 内
+    setTimeout(() => {
       document.getElementById('quote').innerText = data.quote;
       document.getElementById('tags').innerText = data.tags.join(' ');
       document.getElementById('desc').innerText = data.desc;
     
-      // 更新统计
+      // 统计
       let count = parseInt(localStorage.getItem('generateCount') || '0') + 1;
       localStorage.setItem('generateCount', count);
-      const statsEl = document.getElementById('stats');
-      const countEl = document.getElementById('count');
-      countEl.innerText = count;
-      statsEl.classList.add('show');
-      statsEl.style.display = 'block';
+      const stats = document.getElementById('stats');
+      document.getElementById('count').innerText = count;
+      stats.style.display = 'block';
+      setTimeout(() => stats.classList.add('show'), 10);
     
       result.style.display = "block";
       loading.style.display = "none";
