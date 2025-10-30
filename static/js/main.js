@@ -26,6 +26,16 @@ async function generate() {
 
     clearInterval(interval);
     progressBar.style.width = '100%';
+
+    // 在 generate() 函数的 try 块内，setTimeout 之前添加：
+    let count = parseInt(localStorage.getItem('generateCount') || '0');
+    count++;
+    localStorage.setItem('generateCount', count);
+    // 然后在 setTimeout 里显示
+    document.getElementById('count').innerText = count;
+    document.getElementById('stats').style.display = 'block';
+
+    
     setTimeout(() => {
       document.getElementById('quote').innerText = data.quote;
       document.getElementById('tags').innerText = data.tags.join(' ');
