@@ -52,3 +52,11 @@ button:disabled { background: #ccc; cursor: not-allowed; }
   float: none !important;
   display: block;
 }
+
+.copy-again {
+  background: #3498db;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+}
+.copy-again:hover { background: #2980b9; }
