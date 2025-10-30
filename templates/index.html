@@ -26,20 +26,15 @@
   <div class="desc" id="desc"></div>
   <button class="copy copy-desc" onclick="copyDesc()">复制描述</button>
 
-  <!-- 清除浮动 + 分隔线 -->
   <div style="clear: both;"></div>
   <hr style="border: 1px dashed rgba(255,255,255,0.3); margin: 20px 0;">
 
-  <!-- 复制全部按钮，独立占满一行 -->
   <button class="copy copy-all" onclick="copyAll()">复制全部</button>
+  <button class="copy copy-again" onclick="generateAgain()">再来一条</button>
+  <button class="copy copy-script" onclick="copyAsScript()">复制为视频脚本</button>
+</div>
 
-  <!--再来一条按钮-->
-  <button class="copy copy-again" onclick="generateAgain()" style="margin-top: 10px; background: #3498db;">
-  再来一条
-  </button>
-
-  <button class="copy copy-script" onclick="copyAsScript()" style="margin-top: 10px; background: #e74c3c;">
-  复制为视频脚本
-  </button>
+<div id="stats" style="text-align: center; margin: 15px 0; font-size: 14px; color: #ffd93d; display: none;">
+  已为你生成 <span id="count">0</span> 条金句 · 继续加油！
 </div>
 {% endblock %}
