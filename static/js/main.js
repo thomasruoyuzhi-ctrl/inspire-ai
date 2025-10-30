@@ -61,3 +61,11 @@ function generateAgain() {
   // 重新触发生成
   document.getElementById('generateBtn').click();
 }
+
+function copyAsScript() {
+  const quote = document.getElementById('quote').innerText;
+  const tags = document.getElementById('tags').innerText;
+  const desc = document.getElementById('desc').innerText;
+  const script = `${quote}\n\n${desc}\n\n${tags}`;
+  copyToClipboard(script, '已复制为抖音脚本格式！');
+}
