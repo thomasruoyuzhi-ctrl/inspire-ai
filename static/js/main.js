@@ -34,6 +34,14 @@ async function generate() {
       loading.style.display = "none";
       btn.disabled = false;
       btn.innerText = "生成抖音文案";
+      // 在 setTimeout 里，result 显示后添加：
+      /////////////
+      ////////////
+    document.getElementById('stats').style.display = 'block';
+    let count = localStorage.getItem('generateCount') || 0;
+    count++;
+    localStorage.setItem('generateCount', count);
+    document.getElementById('count').innerText = count;
     }, 300);
   } catch (e) {
     alert("生成失败，请重试！");
@@ -42,6 +50,8 @@ async function generate() {
     loading.style.display = "none";
   }
 }
+
+
 
 function copyQuote() { copyToClipboard(document.getElementById('quote').innerText, '金句已复制！'); }
 function copyTags() { copyToClipboard(document.getElementById('tags').innerText, '标签已复制！'); }
