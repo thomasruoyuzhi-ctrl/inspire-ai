@@ -39,4 +39,16 @@ button:disabled { background: #ccc; cursor: not-allowed; }
   font-size: 16px;
   margin-top: 10px;
 }
+
+
 .copy-all:hover { background: #27ae60; }
+.result::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.copy-all {
+  margin-top: 15px !important;
+  float: none !important;
+  display: block;
+}
