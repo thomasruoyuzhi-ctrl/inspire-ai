@@ -1,1 +1,42 @@
-
+body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea, #764ba2); margin: 0; padding: 20px; color: #fff; }
+.container { max-width: 600px; margin: 50px auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+h1 { text-align: center; margin-bottom: 30px; }
+input { width: 100%; padding: 15px; font-size: 18px; border: none; border-radius: 10px; margin-bottom: 20px; }
+button { width: 100%; padding: 15px; background: #ff6b6b; color: white; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; transition: 0.3s; }
+button:hover { background: #ff5252; }
+button:disabled { background: #ccc; cursor: not-allowed; }
+.loading { margin: 20px 0; display: none; text-align: center; }
+.progress-container { width: 100%; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; margin: 10px 0; }
+.progress-bar { height: 20px; width: 0%; background: linear-gradient(90deg, #4ecdc4, #44a08d); border-radius: 10px; transition: width 0.4s ease; }
+.loading-text { font-style: italic; color: #ffd93d; }
+.result { margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 10px; display: none; }
+.quote { font-size: 24px; font-weight: bold; margin: 15px 0; }
+.tags { color: #ffd93d; font-weight: bold; }
+.desc { margin-top: 15px; font-style: italic; }
+.copy {
+  background: #4ecdc4;
+  margin: 8px 0 0 0;
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  float: right;
+  transition: 0.3s;
+}
+.copy:hover { background: #3ab8b1; }
+.copy-quote { background: #ff6b6b; }
+.copy-quote:hover { background: #ff5252; }
+.copy-tags { background: #f39c12; }
+.copy-tags:hover { background: #e67e22; }
+.copy-desc { background: #9b59b6; }
+.copy-desc:hover { background: #8e44ad; }
+.copy-all {
+  background: #2ecc71;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.copy-all:hover { background: #27ae60; }
