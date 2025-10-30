@@ -60,3 +60,11 @@ button:disabled { background: #ccc; cursor: not-allowed; }
   font-size: 16px;
 }
 .copy-again:hover { background: #2980b9; }
+
+.copy-script {
+  background: #e74c3c;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+}
+.copy-script:hover { background: #c0392b; }
