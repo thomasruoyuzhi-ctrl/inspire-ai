@@ -17,21 +17,35 @@
 </div>
 
 <div id="result" class="result">
-  <div class="quote" id="quote"></div>
-  <button class="copy copy-quote" onclick="copyQuote()">复制金句</button>
+  <!-- 金句 -->
+  <div class="item">
+    <div class="quote" id="quote"></div>
+    <button class="copy-btn copy-quote" onclick="copyQuote()">金句</button>
+  </div>
 
-  <div class="tags" id="tags"></div>
-  <button class="copy copy-tags" onclick="copyTags()">复制标签</button>
+  <!-- 标签 -->
+  <div class="item">
+    <div class="tags" id="tags"></div>
+    <button class="copy-btn copy-tags" onclick="copyTags()">标签</button>
+  </div>
 
-  <div class="desc" id="desc"></div>
-  <button class="copy copy-desc" onclick="copyDesc()">复制描述</button>
+  <!-- 描述 -->
+  <div class="item">
+    <div class="desc" id="desc"></div>
+    <button class="copy-btn copy-desc" onclick="copyDesc()">描述</button>
+  </div>
 
-  <div style="clear: both;"></div>
-  <hr style="border: 1px dashed rgba(255,255,255,0.3); margin: 20px 0;">
+  <!-- 统计 -->
+  <div id="stats" class="stats">
+    已为你生成 <span id="count">0</span> 条金句 · 继续加油！
+  </div>
 
-  <button class="copy copy-all" onclick="copyAll()">复制全部</button>
-  <button class="copy copy-again" onclick="generateAgain()">再来一条</button>
-  <button class="copy copy-script" onclick="copyAsScript()">复制为视频脚本</button>
+  <!-- 功能按钮组 -->
+  <div class="action-buttons">
+    <button class="action-btn primary" onclick="copyAll()">复制全部</button>
+    <button class="action-btn again" onclick="generateAgain()">再来一条</button>
+    <button class="action-btn script" onclick="copyAsScript()">视频脚本</button>
+  </div>
 </div>
 
 <div id="stats" style="text-align: center; margin: 15px 0; font-size: 14px; color: #ffd93d; display: none;">
