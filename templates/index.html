@@ -18,21 +18,24 @@
 
 <div id="result" class="result">
   <!-- 金句 -->
-  <div class="item">
-    <div class="quote" id="quote"></div>
-    <button class="copy-btn copy-quote" onclick="copyQuote()">金句</button>
+  <div class="card">
+    <div class="card-label">金句</div>
+    <div class="card-content quote" id="quote"></div>
+    <button class="copy-btn copy-quote" onclick="copyQuote()">复制</button>
   </div>
 
   <!-- 标签 -->
-  <div class="item">
-    <div class="tags" id="tags"></div>
-    <button class="copy-btn copy-tags" onclick="copyTags()">标签</button>
+  <div class="card">
+    <div class="card-label">标签</div>
+    <div class="card-content tags" id="tags"></div>
+    <button class="copy-btn copy-tags" onclick="copyTags()">复制</button>
   </div>
 
   <!-- 描述 -->
-  <div class="item">
-    <div class="desc" id="desc"></div>
-    <button class="copy-btn copy-desc" onclick="copyDesc()">描述</button>
+  <div class="card">
+    <div class="card-label">描述</div>
+    <div class="card-content desc" id="desc"></div>
+    <button class="copy-btn copy-desc" onclick="copyDesc()">复制</button>
   </div>
 
   <!-- 统计 -->
@@ -40,7 +43,7 @@
     已为你生成 <span id="count">0</span> 条金句 · 继续加油！
   </div>
 
-  <!-- 功能按钮组 -->
+  <!-- 功能按钮 -->
   <div class="action-buttons">
     <button class="action-btn primary" onclick="copyAll()">复制全部</button>
     <button class="action-btn again" onclick="generateAgain()">再来一条</button>
