@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Inspire AI - 抖音文案神器{% endblock %}
-
 {% block content %}
+
 <h1>Inspire AI</h1>
 <input type="text" id="theme" placeholder="输入主题（如：坚持、早安、奋斗）" value="坚持">
 <button id="generateBtn" onclick="generate()">生成抖音文案</button>
@@ -12,6 +12,7 @@
     <div id="progressBar" class="progress-bar"></div>
   </div
   <div id="stats" style="text-align: center; margin: 15px 0; font-size: 14px; color: #ffd93d; display: none;">
+  </div>
   已为你生成 <span id="count">0</span> 条金句 · 继续加油！
 </div>
 </div>
