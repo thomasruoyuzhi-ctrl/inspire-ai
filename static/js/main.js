@@ -69,8 +69,25 @@ function copyQuote() { copyToClipboard(document.getElementById('quote').innerTex
 function copyTags() { copyToClipboard(document.getElementById('tags').innerText, '标签已复制！'); }
 function copyDesc() { copyToClipboard(document.getElementById('desc').innerText, '描述已复制！'); }
 function copyAll() {
-  const text = `${document.getElementById('quote').innerText}\n${document.getElementById('tags').innerText}\n${document.getElementById('desc').innerText}`;
-  copyToClipboard(text, '已复制全部！');
+  // 1. 执行复制逻辑（你原来的代码）
+  const text = `${quote}\n\n${desc}\n\n${tags}`;
+  navigator.clipboard.writeText(text);
+
+  // 2. 获取按钮
+  const btn = document.getElementById('copyAllBtn');
+
+  // 3. 改文字 + 样式
+  const originalText = btn.innerText;
+  btn.innerText = '复制完成';
+  btn.style.background = 'linear-gradient(135deg, #27ae60, #1e8449)';
+  btn.disabled = true;
+
+  // 4. 1秒后恢复
+  setTimeout(() => {
+    btn.innerText = originalText;
+    btn.style.background = '';
+    btn.disabled = false;
+  }, 2000);
 }
 
 function copyToClipboard(text, message) {

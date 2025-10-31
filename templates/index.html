@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Inspire AI - 抖音文案神器{% endblock %}
+{% block title %}Inspire AI - AI TikTok Script Generator{% endblock %}
 {% block content %}
 
 <h1>Inspire AI</h1>
 <input type="text" id="theme" placeholder="输入主题（如：坚持、早安、奋斗）" value="坚持">
-<button id="generateBtn" onclick="generate()">生成抖音文案</button>
+<button id="generateBtn" onclick="generate()">Generate Viral Script</button>
 
 <div id="loading" class="loading">
   <div class="loading-text">正在为你生成抖音金句...</div>
@@ -34,7 +34,7 @@
   <!-- 功能按钮 -->
   <!-- 功能按钮 -->
   <div class="action-buttons">
-    <button class="action-btn primary" onclick="copyAll()">复制全部</button>
+    <button class="action-btn primary" id="copyAllBtn" onclick="copyAll()">复制全部</button>
     <button class="action-btn again" onclick="generateAgain()">再来一条</button>
     <button class="action-btn script" onclick="copyAsScript()">视频脚本</button>
   </div>
